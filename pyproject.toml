@@ -22,6 +22,8 @@ ruff = "^0.0.270"
 
 [tool.maturin]
 features = ["pyo3"]
+python-source = "python"
+module-name = "pep508_rs._pep508_rs"
 
 [tool.pytest.ini_options]
 minversion = "7.2.0"

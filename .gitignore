@@ -1,3 +1,5 @@
+*.pyd
+*.so
 .ipynb_checkpoints
 .venv
 /pypi_analysis/pipy_requires_dist.ndjson

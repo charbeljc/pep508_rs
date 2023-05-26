@@ -25,7 +25,7 @@ pub use marker::{
 };
 #[cfg(feature = "pyo3")]
 use pep440_rs::PyVersion;
-use pep440_rs::{Version, VersionSpecifier, VersionSpecifiers};
+use pep440_rs::{Version, VersionSpecifier, VersionSpecifiers, PreRelease};
 #[cfg(feature = "pyo3")]
 use pyo3::{
     basic::CompareOp, create_exception, exceptions::PyNotImplementedError, pyclass, pymethods,
@@ -837,14 +837,14 @@ fn parse(chars: &mut CharIter) -> Result<Requirement, Pep508Error> {
 /// `Version`s come from two different binaries and can therefore never be equal.
 #[cfg(feature = "pyo3")]
 #[pymodule]
-#[pyo3(name = "pep508_rs")]
+#[pyo3(name = "_pep508_rs")]
 pub fn python_module(py: Python<'_>, m: &PyModule) -> PyResult<()> {
     // Allowed to fail if we embed this module in another
     #[allow(unused_must_use)]
     {
         pyo3_log::try_init();
     }
-
+    m.add_class::<PreRelease>()?;
     m.add_class::<PyVersion>()?;
     m.add_class::<VersionSpecifier>()?;
 
